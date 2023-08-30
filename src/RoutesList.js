@@ -5,14 +5,17 @@ import CompanyDetail from "./CompanyDetail";
 import JobList from "./JobList";
 
 /**
+ * Routes to different compoents
+ * If no matching route, then redirect to homepage
+ *
+ * props: none
+ * state: none
  *
  *
- *
- *
+ * App -> RoutesList -> {Homepage, CompanyList, CompanyDetail, JobList}
  *
  *
  */
-
 function RoutesList(){
 
   return(

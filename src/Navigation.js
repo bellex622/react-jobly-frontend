@@ -4,37 +4,46 @@ import { NavLink } from "react-router-dom";
 
 
 /**
+ * Render NavLinks to corresponding routes.
  *
+ * props: none
+ * state: none
  *
- *
+ * App -> Navigation
  *
  */
 
 
-function Navigation(){
+function Navigation() {
 
-  let activeStyle= {
+  let activeStyle = {
     "fontWeight": "bold"
   };
 
-  return(
+  return (
     <nav className="Navigation">
-      <NavLink to="/" className="Navigation-home" style={({ isActive }) =>
-      isActive ? activeStyle: undefined } end>
-      Jobly
+      <NavLink to="/"
+        className="Navigation-home"
+        style={({ isActive }) => isActive ? activeStyle : undefined}
+        end>
+        Jobly
       </NavLink>
 
-      <NavLink to="/companies" className="Navigation-companies" style={({ isActive }) =>
-      isActive ? activeStyle: undefined } >
-      Companies
+      <NavLink to="/companies"
+        className="Navigation-companies"
+        style={({ isActive }) => isActive ? activeStyle : undefined}
+        end>
+        Companies
       </NavLink>
 
-      <NavLink to="/jobs" className="Navigation-jobs" style={({isActive }) =>
-      isActive? activeStyle: undefined } >
-      Jobs
+      <NavLink to="/jobs"
+        className="Navigation-jobs"
+        style={({ isActive }) => isActive ? activeStyle : undefined}
+        end>
+        Jobs
       </NavLink>
     </nav>
-  )
+  );
 }
 
 export default Navigation;
