@@ -10,27 +10,26 @@ import "./CompanyCard.css";
  *
  * state: none
  *
- * CompanyList > CompanyCard
+ * CompanyList -> CompanyCard
  */
 
 function CompanyCard({ company }) {
-  console.log("COMPANYCARD company", company);
+  //console.log("COMPANYCARD company", company);
+
   return (
     <div className="CompanyCard">
-      <div className="CompanyCard-header">
-        <Link
-          to={`/companies/${company.handle}`}
-          className="CompanyCard-link">
+      <Link
+        to={`/companies/${company.handle}`}
+        className="CompanyCard-link">
+        <div className="CompanyCard-header">
           {company.name}
           {company.logoUrl !== null ?
             <img src={company.logoUrl} alt={`${company.name} logo`} />
             :
             null}
           <p>{company.description}</p>
-
-        </Link>
-
-      </div>
+        </div>
+      </Link>
     </div>
   );
 }

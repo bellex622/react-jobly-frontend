@@ -1,28 +1,24 @@
-.CompanyCard {
+.JobCard {
   margin: auto;
   width: 50%;
   margin-bottom: 20px;
   background-color: white;
-  padding: 20px;
+  padding: 12px;
+  padding-left: 15px;
   border-radius: 4px;
 }
 
-.CompanyCard-header {
+.JobCard {
   text-align: left;
 }
 
 
-.CompanyCard-header img {
-  float: right;
-  width: 5%;
-}
-
-.CompanyCard-link {
+.JobCard-{
   text-align: left;
   text-decoration: none;
   color: black;
 }
 
-.CompanyCard-link:hover {
+.JobCard-link:hover {
   color: blue;
 }

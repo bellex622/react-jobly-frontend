@@ -2,24 +2,18 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import './Navigation.css';
 
-
-
-/**
- * Render NavLinks to corresponding routes.
+/** Render NavLinks to corresponding routes.
  *
  * props: none
  * state: none
  *
  * App -> Navigation
- *
  */
-
-
 function Navigation() {
 
   let activeStyle = {
     "fontWeight": "bold",
-    "color":"black"
+    "color": "black"
   };
 
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-/** Render the search form and handle search
+/** Displays the search form and handle search
  *
  * props:
  * -handleSearch
@@ -25,13 +25,13 @@ function SearchForm({ handleSearch }) {
 
   return (
     <div className="SearchForm">
-    <form onSubmit={handleSubmit}>
-      <input
-        value={term}
-        onChange={handleChange}
-        placeholder="Enter search term..." />
-      <button>Search</button>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <input
+          value={term}
+          onChange={handleChange}
+          placeholder="Enter search term..." />
+        <button>Search</button>
+      </form>
     </div>
   );
 

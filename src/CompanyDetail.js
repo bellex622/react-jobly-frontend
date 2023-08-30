@@ -8,11 +8,11 @@ import JobCardList from "./JobCardList";
  * props:none
  *
  * state:
- * -companyDetail: an company detail object {basic info, jobs:[...]}
+ * -companyDetail: an company detail object
+ *    -> {handle, name, description, numEmployees, logoUrl, jobs:[...]}
  * -isLoading: T/F
  *
  * RoutesList -> CompanyDetail -> JobCardList
- *
  */
 function CompanyDetail() {
 

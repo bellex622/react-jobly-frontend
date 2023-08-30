@@ -7,15 +7,15 @@ import React from "react";
  *
  * RoutesList -> Homepage
  */
-function Homepage(){
+function Homepage() {
 
   return (
     <div className="Homepage">
-     <h1> Jobly </h1>
-     <h3> where the jobs are </h3>
+      <h1> Jobly </h1>
+      <h3> where the jobs are </h3>
     </div>
-  )
+  );
 
-  }
+}
 
-  export default Homepage;
+export default Homepage;

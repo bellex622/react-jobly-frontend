@@ -2,19 +2,18 @@ import React, { useState, useEffect } from "react";
 import JoblyApi from "./api";
 import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
-import "./CompanyList.css"
+import "./CompanyList.css";
 
-/** Show list of all companies
+/** Renders list of companies and search bar
  *
  * props: none
  *
  * state:
- * -companies: an array of company detail object [{...},{...}]
+ * -companies: an array of company detail object
+ *    -> [{handle, name, description, numEmployees, logoUrl},{...}]
  * -isLoading: T/F
- * -searchContent
  *
  * RoutesList -> CompanyList -> {SearchForm, CompanyCard}
- *
  */
 function CompanyList() {
   const [companies, setCompanies] = useState([]);
@@ -42,12 +41,12 @@ function CompanyList() {
   return (
     <div className="CompanyList">
       <SearchForm className="CompanyList-search" handleSearch={search} />
-      {companies.length!==0
+      {companies.length !== 0
         ?
         companies.map(company => <CompanyCard company={company} key={company.handle} />)
         :
         <p>Sorry, no results were found!</p>
-    }
+      }
     </div>
   );
 

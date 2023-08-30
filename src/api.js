@@ -45,7 +45,13 @@ class JoblyApi {
     return res.company;
   }
 
-  // ** Get companies (all or by search term) */
+  /** Get companies (all or by search term)
+   *
+   * Accepts an optional search parameter
+   *
+   * Returns an array of company objects
+   *    -> [{handle, name, description, numEmployees, logoUrl}...]
+  */
 
   static async getCompanies(search=""){
     let res;
@@ -62,7 +68,13 @@ class JoblyApi {
   }
 
 
-  /** Get jobs (all or by search term) */
+  /** Get jobs (all or by search term)
+   *
+   * Accepts an optional search parameter
+   *
+   * Returns an array of job objects
+   *    -> [{id, title, salary, equity, companyHandle, companyName}...]
+  */
 
   static async getJobs(search=""){
     let res;

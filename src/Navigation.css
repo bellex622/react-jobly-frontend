@@ -1,15 +1,15 @@
 .Navigation {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
-
+  padding: 20px;
+  background-color: white;
 }
 
 .Navigation-home {
   float: left;
   text-decoration: none;
-  color: darkgrey;
-
+  color: black;
+  font-size: 1.3em;
 }
 
 .Navigation-pages {
@@ -20,7 +20,7 @@
 .Navigation-jobs {
   padding: 10px;
   text-decoration: none;
-  color: darkgrey;
+  color: rgb(102, 102, 102);
 }
 
 .Navigation-home:hover,

@@ -1,21 +1,24 @@
 import React from "react";
 
-/** Render a job card
+/** Displays a job card
  *
  * props:
  * - job: {id, title, salary, equity}
  *
+ * state: none
+ *
+ * JobCardList -> JobCard
  */
 function JobCard({ job }) {
 
   return (
-    <div className="jobCard">
+    <div className="JobCard">
       <h3>{job.title}</h3>
-      <p>Salary:{job.salary}</p>
-      <p>Equity:{job.equity}</p>
+      <p>{job.companyName}</p>
+      <p>Salary: {job.salary}</p>
+      <p>Equity: {job.equity}</p>
     </div>
   );
-
 
 }
 

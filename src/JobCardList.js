@@ -1,12 +1,17 @@
 import React from "react";
-import JobCard from "./JobCard"
+import JobCard from "./JobCard";
+import "./JobCard.css";
 
 
-/** Render the job list
+/** Displays the job list
  *
  * props:
- * -jobs: an array of job objects [{...},{...}]
+ * -jobs: an array of job objects
+ *    -> [{id, title, salary, equity, companyHandle, companyName},{...}]
  *
+ * state: none
+ *
+ * JobList -> JobCardList -> JobCard
  */
 
 function JobCardList({ jobs }) {
@@ -16,7 +21,6 @@ function JobCardList({ jobs }) {
       {jobs.map(job => <JobCard key={job.id} job={job} />)}
     </div>
   );
-
 
 }
 
