@@ -45,10 +45,23 @@ class JoblyApi {
     return res.company;
   }
 
-  // obviously, you'll add a lot here ...
+  // ** Get companies (all or by search term) */
 
-  //get all companies
-  //get companies from search
+  static async getCompanies(search=""){
+    let res;
+    console.log("RESULTS FROM GET REQUEST", res);
+
+    if(search.length){
+      res = await this.request('companies', {
+        nameLike: { search }
+      });
+    } else {
+      res = await this.request('companies');
+    }
+    return res.companies;
+  }
+
+
   //get all jobs
   //get jobs from search
 }
