@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./CompanyCard.css";
 
 
 /** Displays company card with link to company detail page
@@ -21,13 +22,15 @@ function CompanyCard({ company }) {
           to={`/companies/${company.handle}`}
           className="CompanyCard-link">
           {company.name}
+          {company.logoUrl !== null ?
+            <img src={company.logoUrl} alt={`${company.name} logo`} />
+            :
+            null}
+          <p>{company.description}</p>
+
         </Link>
-        {company.logoUrl !== null ?
-          <img src={company.logoUrl} alt={`${company.name} logo`} />
-          :
-          null}
+
       </div>
-      <p>{company.description}</p>
     </div>
   );
 }

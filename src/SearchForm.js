@@ -24,6 +24,7 @@ function SearchForm({ handleSearch }) {
   }
 
   return (
+    <div className="SearchForm">
     <form onSubmit={handleSubmit}>
       <input
         value={term}
@@ -31,6 +32,7 @@ function SearchForm({ handleSearch }) {
         placeholder="Enter search term..." />
       <button>Search</button>
     </form>
+    </div>
   );
 
 }

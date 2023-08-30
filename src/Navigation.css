@@ -1,0 +1,30 @@
+.Navigation {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+
+}
+
+.Navigation-home {
+  float: left;
+  text-decoration: none;
+  color: darkgrey;
+
+}
+
+.Navigation-pages {
+  float: right;
+}
+
+.Navigation-companies,
+.Navigation-jobs {
+  padding: 10px;
+  text-decoration: none;
+  color: darkgrey;
+}
+
+.Navigation-home:hover,
+.Navigation-companies:hover,
+.Navigation-jobs:hover {
+  color: black;
+}

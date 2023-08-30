@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import './Navigation.css';
 
 
 
@@ -17,7 +18,8 @@ import { NavLink } from "react-router-dom";
 function Navigation() {
 
   let activeStyle = {
-    "fontWeight": "bold"
+    "fontWeight": "bold",
+    "color":"black"
   };
 
   return (
@@ -28,20 +30,22 @@ function Navigation() {
         end>
         Jobly
       </NavLink>
+      <div className="Navigation-pages">
+        <NavLink to="/companies"
+          className="Navigation-companies"
+          style={({ isActive }) => isActive ? activeStyle : undefined}
+          end>
+          Companies
+        </NavLink>
 
-      <NavLink to="/companies"
-        className="Navigation-companies"
-        style={({ isActive }) => isActive ? activeStyle : undefined}
-        end>
-        Companies
-      </NavLink>
+        <NavLink to="/jobs"
+          className="Navigation-jobs"
+          style={({ isActive }) => isActive ? activeStyle : undefined}
+          end>
+          Jobs
+        </NavLink>
+      </div>
 
-      <NavLink to="/jobs"
-        className="Navigation-jobs"
-        style={({ isActive }) => isActive ? activeStyle : undefined}
-        end>
-        Jobs
-      </NavLink>
     </nav>
   );
 }

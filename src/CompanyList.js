@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import JoblyApi from "./api";
 import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
+import "./CompanyList.css"
 
 /** Show list of all companies
  *
@@ -40,7 +41,7 @@ function CompanyList() {
 
   return (
     <div className="CompanyList">
-      <SearchForm handleSearch={search} />
+      <SearchForm className="CompanyList-search" handleSearch={search} />
       {companies.length!==0
         ?
         companies.map(company => <CompanyCard company={company} key={company.handle} />)

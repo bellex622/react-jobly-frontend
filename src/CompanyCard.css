@@ -1,0 +1,27 @@
+.CompanyCard {
+  margin: auto;
+  width: 50%;
+  margin-bottom: 20px;
+  background-color: lightcoral;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.CompanyCard-header {
+  text-align: left;
+}
+
+.CompanyCard-header img {
+  float: right;
+  width: 5%;
+}
+
+.CompanyCard-link {
+  text-align: left;
+  text-decoration: none;
+  color: black;
+}
+
+.CompanyCard-link:hover {
+  color: blue;
+}
