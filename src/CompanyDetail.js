@@ -34,7 +34,6 @@ function CompanyDetail() {
 
   return (
     <div className="CompanyDetail">
-      <p>This is CompanyDetail!!!!</p>
       <h2>{companyDetail.name}</h2>
       <p>{companyDetail.description}</p>
       <JobCardList jobs={companyDetail.jobs} />

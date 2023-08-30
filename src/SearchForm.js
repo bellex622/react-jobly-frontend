@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import JoblyApi from "./api";
-
-
+import React, { useState } from "react";
 
 /** Render the search form and handle search
  *
  * props:
  * -handleSearch
  *
+ * state:
+ * - term => ""
+ *
+ * CompanyList > SearchForm
  */
 function SearchForm({ handleSearch }) {
   const [term, setTerm] = useState("");

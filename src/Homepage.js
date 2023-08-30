@@ -1,6 +1,4 @@
-import React, {useState, useEffect} from "react";
-
-
+import React from "react";
 
 /** Show the homepage
  *
@@ -13,7 +11,8 @@ function Homepage(){
 
   return (
     <div className="Homepage">
-      <p>This is Homepage!!!!</p>
+     <h1> Jobly </h1>
+     <h3> where the jobs are </h3>
     </div>
   )
 

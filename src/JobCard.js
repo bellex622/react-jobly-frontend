@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import JoblyApi from "./api";
+import React from "react";
 
 /** Render a job card
  *

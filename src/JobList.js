@@ -1,4 +1,7 @@
 import React, {useState, useEffect} from "react";
+import JoblyApi from "./api";
+import JobCard from "./JobCard";
+import SearchForm from "./SearchForm";
 
 
 /** Render a list of all jobs
@@ -12,16 +15,41 @@ import React, {useState, useEffect} from "react";
  *
  * RoutesList -> JobList -> {SearchForm, JobCardList}
  *
- *
  */
 function JobList(){
+  const [jobs, setJobs] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  console.log("STATE ==> jobs", jobs);
+  console.log("STATE ==> isLoading", isLoading);
+
+  useEffect(function fetchJobsWhenMounted() {
+    async function fetchJobs(){
+      const jobsResult = await JoblyApi.getJobs();
+      setJobs(jobsResult);
+      setIsLoading(false);
+    }
+    fetchJobs();
+  }, []);
+
+  async function search(term) {
+    const searchResult = await JoblyApi.getJobs(term);
+    setJobs(searchResult);
+  }
+
+  if(isLoading) return <i>Loading...</i>;
 
   return (
     <div className="JobList">
-      <p>This is JobList!!!!</p>
+      <SearchForm handleSearch={search} />
+      {jobs.length !== 0
+      ?
+      jobs.map(job => <JobCard job={job} key={job.id} />)
+      :
+      <p> Sorry, no results were found! </p>
+    }
     </div>
-  )
-
+  );
   }
 
   export default JobList;
