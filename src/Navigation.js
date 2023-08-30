@@ -25,7 +25,7 @@ function Navigation(){
       </NavLink>
 
       <NavLink to="/companies" className="Navigation-companies" style={({ isActive }) =>
-      isActive ? activeStyle: undefined } end>
+      isActive ? activeStyle: undefined } >
       Companies
       </NavLink>
 
