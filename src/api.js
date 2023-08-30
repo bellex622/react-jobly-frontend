@@ -53,7 +53,7 @@ class JoblyApi {
 
     if(search.length){
       res = await this.request('companies', {
-        nameLike: { search }
+        nameLike: search
       });
     } else {
       res = await this.request('companies');

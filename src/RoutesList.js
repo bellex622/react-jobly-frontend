@@ -16,17 +16,17 @@ import JobList from "./JobList";
  *
  *
  */
-function RoutesList(){
+function RoutesList() {
 
-  return(
+  return (
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/companies" element={<CompanyList />} />
-      <Route path="/companies/:company" element={<CompanyDetail />} />
+      <Route path="/companies/:handle" element={<CompanyDetail />} />
       <Route path="/jobs" element={<JobList />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
-  )
+  );
 }
 
 export default RoutesList;

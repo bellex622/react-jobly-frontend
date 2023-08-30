@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import JoblyApi from "./api";
 import CompanyCard from "./CompanyCard";
-//import SearchForm from "./SearchForm";
+import SearchForm from "./SearchForm";
 
 /** Show list of all companies
  *
@@ -15,29 +15,40 @@ import CompanyCard from "./CompanyCard";
  * RoutesList -> CompanyList -> {SearchForm, CompanyCard}
  *
  */
-function CompanyList(){
-const [companies, setCompanies] = useState([]);
-const [isLoading, setIsLoading] = useState(true);
+function CompanyList() {
+  const [companies, setCompanies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-console.log("STATE ==> companies", companies);
-console.log("STATE ==> isLoading", isLoading);
+  console.log("STATE ==> companies", companies);
+  console.log("STATE ==> isLoading", isLoading);
 
-useEffect(function fetchCompaniesWhenMounted(){
-  async function fetchCompanies(){
-    const companiesResult = await JoblyApi.getCompanies();
-    setCompanies(companiesResult);
-    setIsLoading(false);
+  useEffect(function fetchCompaniesWhenMounted() {
+    async function fetchCompanies() {
+      const companiesResult = await JoblyApi.getCompanies();
+      setCompanies(companiesResult);
+      setIsLoading(false);
+    }
+    fetchCompanies();
+  }, []);
+
+  async function search(term) {
+    const searchResult = await JoblyApi.getCompanies(term);
+    setCompanies(searchResult);
   }
-  fetchCompanies();
-}, []);
 
-if(isLoading) return <i>Loading...</i>;
+  if (isLoading) return <i>Loading...</i>;
 
-return (
-  <div className="CompanyList">
-    {companies.map(company => <CompanyCard company={company} key={company.handle} />)}
-  </div>
-)
+  return (
+    <div className="CompanyList">
+      <SearchForm handleSearch={search} />
+      {companies.length!==0
+        ?
+        companies.map(company => <CompanyCard company={company} key={company.handle} />)
+        :
+        <p>Sorry, no results were found!</p>
+    }
+    </div>
+  );
 
 }
 
