@@ -32,6 +32,7 @@ function JobList() {
     fetchJobs();
   }, []);
 
+  /** Fetch the jobs info by search term, and update state of jobs*/
   async function search(term) {
     const searchResult = await JoblyApi.getJobs(term);
     setJobs(searchResult);

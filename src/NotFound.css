@@ -1,24 +1,24 @@
-.JobCard {
+.NotFound {
   margin: auto;
+  margin-top: 30px;
   width: 50%;
   margin-bottom: 20px;
   background-color: white;
   padding: 12px;
   padding-left: 15px;
+  padding-bottom: 25px;
   border-radius: 4px;
 }
 
-.JobCard {
-  text-align: left;
+.NotFound p {
+  font-size: 1.5em;
 }
 
-
-.JobCard-link {
-  text-align: left;
+.NotFound-link {
   text-decoration: none;
-  color: black;
+  color: rgb(79, 78, 78);
 }
 
-.JobCard-link:hover {
-  color: blue;
+.NotFound-link:hover {
+  color: black;
 }

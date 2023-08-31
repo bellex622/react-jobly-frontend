@@ -22,6 +22,7 @@ function CompanyList() {
   console.log("STATE ==> companies", companies);
   console.log("STATE ==> isLoading", isLoading);
 
+  //only fetch all companies info from API on mount
   useEffect(function fetchCompaniesWhenMounted() {
     async function fetchCompanies() {
       const companiesResult = await JoblyApi.getCompanies();
@@ -31,6 +32,7 @@ function CompanyList() {
     fetchCompanies();
   }, []);
 
+  /** Fetch the companies info by search term, and update state of companies*/
   async function search(term) {
     const searchResult = await JoblyApi.getCompanies(term);
     setCompanies(searchResult);

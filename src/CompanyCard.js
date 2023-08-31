@@ -23,10 +23,12 @@ function CompanyCard({ company }) {
         className="CompanyCard-link">
         <div className="CompanyCard-header">
           {company.name}
-          {company.logoUrl !== null ?
+          {company.logoUrl !== null
+            ?
             <img src={company.logoUrl} alt={`${company.name} logo`} />
             :
-            null}
+            null
+          }
           <p>{company.description}</p>
         </div>
       </Link>

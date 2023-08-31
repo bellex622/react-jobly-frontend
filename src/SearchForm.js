@@ -3,7 +3,7 @@ import React, { useState } from "react";
 /** Displays the search form and handle search
  *
  * props:
- * -handleSearch
+ * -handleSearch: a function passed from parent component
  *
  * state:
  * - term => ""
@@ -22,15 +22,16 @@ function SearchForm({ handleSearch }) {
     handleSearch(term);
     setTerm("");
   }
-
   return (
     <div className="SearchForm">
       <form onSubmit={handleSubmit}>
+        <label htmlFor="SearchForm-input"></label>
         <input
+          id="SearchForm-input"
           value={term}
           onChange={handleChange}
           placeholder="Enter search term..." />
-        <button>Search</button>
+        <button >Search</button>
       </form>
     </div>
   );
