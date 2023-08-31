@@ -25,7 +25,7 @@ function CompanyCard({ company }) {
           {company.name}
           {company.logoUrl !== null
             ?
-            <img src={company.logoUrl} alt={`${company.name} logo`} />
+            <img src={company.logoUrl} alt={`${company.name} logo`}/>
             :
             null
           }
