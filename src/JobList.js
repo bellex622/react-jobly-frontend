@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import JoblyApi from "./api";
-import JobCard from "./JobCard";
 import SearchForm from "./SearchForm";
+import JobCardList from "./JobCardList";
 
 
 /** Render a list of jobs and search bar
@@ -45,7 +45,7 @@ function JobList() {
       <SearchForm handleSearch={search} />
       {jobs.length !== 0
         ?
-        jobs.map(job => <JobCard job={job} key={job.id} />)
+        <JobCardList jobs={jobs} />
         :
         <p> Sorry, no results were found! </p>
       }

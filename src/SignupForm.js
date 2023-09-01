@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
-import JoblyApi from "./api";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
 
 /** Form for user Signup
- * state:none
+ *
+ * state:
+ * -formdata: {username, password}
+ * -isSubmitted: T/F
+ * -errorMessages: an array of error messages [...]
+ *
  * props:
- * -handleSubmit: function passed from parent component
+ * -handleSignup: function passed from parent component
+ *
+ * RoutesList -> SignupForm -> Alert
  */
 function SignupForm({ handleSignup }) {
-
+const navigate = useNavigate();
   const initialState = {
     username: "",
     password: "",
@@ -19,7 +25,6 @@ function SignupForm({ handleSignup }) {
   };
 
   const [formData, setFormData] = useState(initialState);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
 
 
@@ -33,16 +38,29 @@ function SignupForm({ handleSignup }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    const res = await handleSignup(formData);
-    if (res) {
-      setErrorMessages(res);
-    } else {
-      setIsSubmitted(true);
-      setFormData(initialState);
+    try {
+      await handleSignup(formData);
+      setFormData({ username: "", password: "" });
+      navigate("/");
     }
+    catch(err){
+      setErrorMessages(err);
+    }
+
   }
 
-  if (isSubmitted) return <Navigate to="/" />;
+  // async function handleSubmit(evt) {
+  //   evt.preventDefault();
+  //   const res = await handleSignup(formData);
+  //   if (res) {
+  //     setErrorMessages(res);
+  //   } else {
+  //     setIsSubmitted(true);
+  //     setFormData(initialState);
+  //   }
+  // }
+
+  // if (isSubmitted) return <Navigate to="/" />;
 
   return (
     <div className="SignupForm">
@@ -59,6 +77,7 @@ function SignupForm({ handleSignup }) {
         <input className="Signup-password"
           name="password"
           id="password"
+          type="password"
           onChange={handleChange} />
 
         <label htmlFor="firstName">First Name</label>
@@ -77,9 +96,10 @@ function SignupForm({ handleSignup }) {
         <input className="SignupForm-email"
           name="email"
           id="email"
+          type="email"
           onChange={handleChange} />
 
-        {errorMessages !== [] &&
+        {errorMessages.length !== 0 &&
           <Alert errors={errorMessages} />
         }
 

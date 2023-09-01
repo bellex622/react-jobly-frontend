@@ -5,10 +5,15 @@ import userContext from "./userContext";
 
 /** Show the homepage
  *
- * props:none
+ * props:
+ * -firstName
+ *
  * state:none
  *
- * RoutesList -> Homepage
+ * context:
+ * -isLoggedIn: T/F
+ *
+ * RoutesList -> Homepage -> Link
  */
 function Homepage({ firstName }) {
 

@@ -6,8 +6,13 @@ import './Navigation.css';
 /** Render NavLinks to corresponding routes.
  *
  * props: none
- * -handleLogOut:
- * state: none
+ * -handleLogOut: a function passed from parent component
+ * -username
+ *
+ * state:none
+ *
+ * context:
+ * -isLoggedIn: T/F
  *
  * App -> Navigation
  */

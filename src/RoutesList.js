@@ -14,10 +14,18 @@ import userContext from "./userContext";
  * Routes to different components
  * If no matching route, then redirect to homepage
  *
- * props: none
+ * props:
+ * -handleSignup: a function passed from parent component
+ * -handleLogin: a function passed from parent component
+ * -userData: {username, firstName, lastName, email, isAdmin, applications}
+ *
  * state: none
  *
- * App -> RoutesList -> {Homepage, CompanyList, CompanyDetail, JobList}
+ * context:
+ * -isLoggedIn: T/F
+ *
+ * App -> RoutesList -> {Homepage, CompanyList, CompanyDetail, JobList,
+ * SignupForm, LoginForm, Navigate, ProfileForm}
  */
 function RoutesList({ handleSignup, handleLogin, userData }) {
 

@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import userContext from "./userContext";
 import { BrowserRouter } from "react-router-dom";
 import Navigation from "./Navigation";
@@ -10,12 +10,20 @@ import JoblyApi from './api';
  *
  * props: none
  *
- * state: none
+ * state:
+ * -isLoggedIn: T/F
+ * -userData: {username, firstName, lastName, email, isAdmin, applications}
+ * -token: token generated either from user registration or user login
+ *
+ * context:
+ * -isLoggedIn: T/F
  *
  * App -> {Navigation, RoutesList}
 */
 
 function App() {
+
+  //TODO:just use userData to keep track of login status
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
   const [token, setToken] = useState("");
@@ -24,25 +32,21 @@ function App() {
   console.log("STATE ==> token", token);
 
   async function userSignup(userInfo) {
-    try {
-      const res = await JoblyApi.signup(userInfo);
+      const token = await JoblyApi.signup(userInfo);
+      const user = await JoblyApi.getUser();
       setIsLoggedIn(true);
-      setToken(res.token);
-      setUserData(res.user);
-    } catch (err) {
-      return err;
-    }
+      setToken(token);
+      setUserData(user);
   }
+
+
   async function userLogin(loginData) {
-    try{
-    const res = await JoblyApi.login(loginData);
-    console.log("RESULT OF SIGN IN=", res);
-    setIsLoggedIn(true);
-    setToken(res.token);
-    setUserData(res.user);
-    } catch(err) {
-      return err;
-    }
+      const token = await JoblyApi.login(loginData);
+      console.log("RESULT OF SIGN IN=", token);
+      const user = await JoblyApi.getUser();
+      setIsLoggedIn(true);
+      setToken(token);
+      setUserData(user);
   }
 
   function userLogout() {

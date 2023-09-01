@@ -1,16 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
 
 /** Form for user login
- * state:none
+ * state:
+ * -formdata: {username, password}
+ * -isSubmitted: T/F
+ * -errorMessages: an array of error messages [...]
+ *
  * props:
- * -handleSubmit: function passed from parent component
+ * -handleLogin: a function passed from parent component
+ *
+ * RoutesList -> SignupForm -> Alert
  */
 function LoginForm({ handleLogin }) {
 
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({ username: "", password: "" });
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
 
   function handleChange(evt) {
@@ -23,16 +30,17 @@ function LoginForm({ handleLogin }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    const res = await handleLogin(formData);
-    if(res){
-      setErrorMessages(res);
-    } else {
-    setIsSubmitted(true);
-    setFormData({ username: "", password: "" });
+    try {
+      await handleLogin(formData);
+      setFormData({ username: "", password: "" });
+      navigate("/");
+    }
+    catch (err) {
+      console.log("errors are",err)
+      setErrorMessages(err);
     }
   }
 
-  if (isSubmitted) return <Navigate to="/" />;
 
   return (
     <div className="LoginForm">
@@ -47,9 +55,10 @@ function LoginForm({ handleLogin }) {
         <input className="LoginForm-password"
           name="password"
           id="password"
+          type="password"
           onChange={handleChange} />
 
-      {errorMessages !== [] &&
+        {errorMessages.length !== 0 &&
           <Alert errors={errorMessages} />
         }
 

@@ -1,4 +1,6 @@
 import axios from "axios";
+import jwt from "jwt-decode";
+
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
@@ -90,22 +92,38 @@ class JoblyApi {
     return res.jobs;
   }
 
-  /** user login
-   *
-  */
+  //TODO: just return the token
+  //TODO: get user info by using token
+  /** user login*/
   static async login(loginData) {
     const token = (await this.request('auth/token', loginData, 'post')).token;
     JoblyApi.token = token;
-    const user = (await this.request(`users/${loginData.username}`)).user;
-    return {token, user};
+    return token;
   }
+  // static async login(loginData) {
+  //   const token = (await this.request('auth/token', loginData, 'post')).token;
+  //   JoblyApi.token = token;
+  //   const user = (await this.request(`users/${loginData.username}`)).user;
+  //   return {token, user};
+  // }
 
   /** user signup */
   static async signup(userInfo) {
-    const token = await this.request('auth/register', userInfo, 'post');
+    const token = (await this.request('auth/register', userInfo, 'post')).token;
     JoblyApi.token = token;
-    const user = (await this.request(`users/${userInfo.username}`)).user;
-    return {token, user};
+    return token;
+  }
+  // static async signup(userInfo) {
+  //   const token = (await this.request('auth/register', userInfo, 'post')).token;
+  //   JoblyApi.token = token;
+  //   const user = (await this.request(`users/${userInfo.username}`)).user;
+  //   return {token, user};
+  // }
+  static async getUser() {
+    const username = jwt.decode(JoblyApi.token);
+    const user = (await this.request('users/${username}', 'get')).user;
+
+    return user;
   }
 
 }
