@@ -7,6 +7,11 @@
   border-radius: 4px;
 }
 
+.CompanyCard:hover {
+  transition: .3s;
+  transform: scale(1.03);
+}
+
 .CompanyCard-header {
   text-align: left;
 }

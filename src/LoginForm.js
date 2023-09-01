@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import JoblyApi from "./api";
+import Alert from "./Alert";
 
 /** Form for user login
  * state:none
@@ -11,6 +11,7 @@ function LoginForm({ handleLogin }) {
 
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessages, setErrorMessages] = useState([]);
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -20,11 +21,15 @@ function LoginForm({ handleLogin }) {
     }));
   }
 
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    handleLogin(formData);
+    const res = await handleLogin(formData);
+    if(res){
+      setErrorMessages(res);
+    } else {
     setIsSubmitted(true);
     setFormData({ username: "", password: "" });
+    }
   }
 
   if (isSubmitted) return <Navigate to="/" />;
@@ -43,6 +48,11 @@ function LoginForm({ handleLogin }) {
           name="password"
           id="password"
           onChange={handleChange} />
+
+      {errorMessages !== [] &&
+          <Alert errors={errorMessages} />
+        }
+
         <button className="LoginForm-btn">Submit</button>
       </form>
 

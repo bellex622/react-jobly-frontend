@@ -90,24 +90,23 @@ class JoblyApi {
     return res.jobs;
   }
 
-  /** user login */
+  /** user login
+   *
+  */
   static async login(loginData) {
-    const res = await this.request('auth/token', loginData, 'post');
-
-    return res;
-
-
+    const token = (await this.request('auth/token', loginData, 'post')).token;
+    JoblyApi.token = token;
+    const user = (await this.request(`users/${loginData.username}`)).user;
+    return {token, user};
   }
 
   /** user signup */
   static async signup(userInfo) {
-    const res = await this.request('auth/register', userInfo, 'post');
-
-    return res;
-
+    const token = await this.request('auth/register', userInfo, 'post');
+    JoblyApi.token = token;
+    const user = (await this.request(`users/${userInfo.username}`)).user;
+    return {token, user};
   }
-
-
 
 }
 

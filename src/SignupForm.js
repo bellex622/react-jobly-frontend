@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import JoblyApi from "./api";
+import Alert from "./Alert";
 
 /** Form for user Signup
  * state:none
@@ -8,6 +9,7 @@ import JoblyApi from "./api";
  * -handleSubmit: function passed from parent component
  */
 function SignupForm({ handleSignup }) {
+
   const initialState = {
     username: "",
     password: "",
@@ -15,8 +17,10 @@ function SignupForm({ handleSignup }) {
     lastName: "",
     email: ""
   };
+
   const [formData, setFormData] = useState(initialState);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessages, setErrorMessages] = useState([]);
 
 
   function handleChange(evt) {
@@ -27,11 +31,15 @@ function SignupForm({ handleSignup }) {
     }));
   }
 
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    handleSignup(formData);
-    setIsSubmitted(true);
-    setFormData(initialState);
+    const res = await handleSignup(formData);
+    if (res) {
+      setErrorMessages(res);
+    } else {
+      setIsSubmitted(true);
+      setFormData(initialState);
+    }
   }
 
   if (isSubmitted) return <Navigate to="/" />;
@@ -71,6 +79,9 @@ function SignupForm({ handleSignup }) {
           id="email"
           onChange={handleChange} />
 
+        {errorMessages !== [] &&
+          <Alert errors={errorMessages} />
+        }
 
         <button className="SignupForm-btn">Submit</button>
       </form>
