@@ -5,31 +5,31 @@ import userContext from "./userContext";
 
 /** Show the homepage
  *
- * props:
- * -firstName
+ * props: none
  *
- * state:none
+ * state: none
  *
  * context:
- * -isLoggedIn: T/F
+ * -hasToken: boolean
+ * -userInfo: {username, firstName, lastName, email, isAdmin, applications}
  *
  * RoutesList -> Homepage -> Link
  */
-function Homepage({ firstName }) {
+function Homepage() {
 
-  const { isLoggedIn } = useContext(userContext);
+  const { hasToken, userInfo } = useContext(userContext);
 
   return (
     <div className="Homepage">
 
       {
-        isLoggedIn
+        hasToken
         ?
 
           <div>
             < h1 > Jobly </h1 >
             <h3> where the jobs are </h3>
-            <p> Welcome back, {firstName}! </p>
+            <p> Welcome back, {userInfo.firstName}! </p>
           </div >
 
         :

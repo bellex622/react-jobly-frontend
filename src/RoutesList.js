@@ -17,36 +17,35 @@ import userContext from "./userContext";
  * props:
  * -handleSignup: a function passed from parent component
  * -handleLogin: a function passed from parent component
- * -userData: {username, firstName, lastName, email, isAdmin, applications}
  *
  * state: none
  *
  * context:
- * -isLoggedIn: T/F
+ * -hasToken: boolean
  *
  * App -> RoutesList -> {Homepage, CompanyList, CompanyDetail, JobList,
  * SignupForm, LoginForm, Navigate, ProfileForm}
  */
-function RoutesList({ handleSignup, handleLogin, userData }) {
+function RoutesList({ handleSignup, handleLogin }) {
 
-  const { isLoggedIn } = useContext(userContext);
+  const { hasToken } = useContext(userContext);
 
   return (
     <Routes>
-      {isLoggedIn ?
+      {hasToken ?
         <>
-          <Route path="/" element={<Homepage firstName={userData.firstName} />} />
+          <Route path="/" element={<Homepage />} />
           <Route path="/companies" element={<CompanyList />} />
           <Route path="/companies/:handle" element={<CompanyDetail />} />
           <Route path="/jobs" element={<JobList />} />
           <Route path="/signup" element={<SignupForm handleSignup={handleSignup} />} />
           <Route path="/login" element={<LoginForm handleLogin={handleLogin} />} />
-          <Route path="/profile" element={<ProfileForm userData={userData} />} />
+          <Route path="/profile" element={<ProfileForm />} />
           <Route path="*" element={<Navigate to="/" />} />
         </>
         :
         <>
-          <Route path="/" element={<Homepage firstName={userData.firstName} />} />
+          <Route path="/" element={<Homepage />} />
           <Route path="/signup" element={<SignupForm handleSignup={handleSignup} />} />
           <Route path="/login" element={<LoginForm handleLogin={handleLogin} />} />
           <Route path="*" element={<Navigate to="/" />} />

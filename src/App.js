@@ -1,66 +1,79 @@
 import './App.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import userContext from "./userContext";
 import { BrowserRouter } from "react-router-dom";
 import Navigation from "./Navigation";
 import RoutesList from "./RoutesList";
 import JoblyApi from './api';
+import decode from "jwt-decode";
 
 /** Render the Jobly app
  *
  * props: none
  *
  * state:
- * -isLoggedIn: T/F
  * -userData: {username, firstName, lastName, email, isAdmin, applications}
  * -token: token generated either from user registration or user login
  *
+ * local storage:
+ * - token: string token
+ * - user: object of user data
+ *
  * context:
- * -isLoggedIn: T/F
+ * - hasToken: boolean
+ * - userInfo: {username, firstName, lastName, email, isAdmin, applications}
  *
  * App -> {Navigation, RoutesList}
 */
 
 function App() {
-
-  //TODO:just use userData to keep track of login status
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
   const [token, setToken] = useState("");
 
   console.log("STATE ==> userData", userData);
   console.log("STATE ==> token", token);
 
+  const userToken = localStorage.getItem('token');
+  const userInfo = JSON.parse(localStorage.getItem('user'));
+
+  useEffect(function fetchUserDetailsWhenTokenChanges(){
+    async function fetchUserDetails(){
+      if(token.length){
+      const {username} = decode(JoblyApi.token);
+      const user = await JoblyApi.getUser(username);
+      setUserData(user);
+
+      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', token);
+      }
+    }
+    fetchUserDetails();
+
+  }, [token]);
+
+
   async function userSignup(userInfo) {
       const token = await JoblyApi.signup(userInfo);
-      const user = await JoblyApi.getUser();
-      setIsLoggedIn(true);
       setToken(token);
-      setUserData(user);
   }
-
 
   async function userLogin(loginData) {
       const token = await JoblyApi.login(loginData);
-      console.log("RESULT OF SIGN IN=", token);
-      const user = await JoblyApi.getUser();
-      setIsLoggedIn(true);
       setToken(token);
-      setUserData(user);
   }
 
   function userLogout() {
-    setIsLoggedIn(false);
     setToken("");
+    localStorage.clear();
     setUserData({});
   }
 
   return (
     <div className="App">
-      <userContext.Provider value={{ isLoggedIn }}>
+      <userContext.Provider value={{ hasToken: Boolean(userToken), userInfo }}>
         <BrowserRouter>
-          <Navigation username={userData.username} handleLogOut={userLogout} />
-          <RoutesList handleSignup={userSignup} handleLogin={userLogin} userData={userData} />
+          <Navigation handleLogOut={userLogout} />
+          <RoutesList handleSignup={userSignup} handleLogin={userLogin} />
         </BrowserRouter>
       </userContext.Provider>
     </div>

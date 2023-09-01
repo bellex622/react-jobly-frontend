@@ -7,17 +7,19 @@ import './Navigation.css';
  *
  * props: none
  * -handleLogOut: a function passed from parent component
- * -username
  *
  * state:none
  *
  * context:
- * -isLoggedIn: T/F
+ * - hasToken: boolean
+ * - userInfo: {username, firstName, lastName, email, isAdmin, applications}
  *
  * App -> Navigation
  */
-function Navigation({ handleLogOut, username }) {
-  const { isLoggedIn } = useContext(userContext);
+function Navigation({ handleLogOut }) {
+  const { hasToken, userInfo } = useContext(userContext);
+
+  console.log("HASTOKEN=", hasToken);
 
   let activeStyle = {
     "fontWeight": "bold",
@@ -28,7 +30,7 @@ function Navigation({ handleLogOut, username }) {
 
     <nav className="Navigation">
 
-      {!isLoggedIn ?
+      {!hasToken ?
         <div>
           <NavLink to="/"
             className="Navigation-home"
@@ -82,7 +84,7 @@ function Navigation({ handleLogOut, username }) {
               }
               onClick={handleLogOut}
               end>
-              Logout {username}
+              Logout {userInfo.username}
             </NavLink>
 
           </div>
