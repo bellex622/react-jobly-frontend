@@ -29,6 +29,8 @@ import decode from "jwt-decode";
 function App() {
   const [userData, setUserData] = useState({});
   const [token, setToken] = useState("");
+  //TODO: set token state to the value of token in localStorage (or "");
+  // const[token, setToken] = useState((localStorage.getItem('token')) || "");
 
   console.log("STATE ==> userData", userData);
   console.log("STATE ==> token", token);
@@ -67,9 +69,11 @@ function App() {
     localStorage.clear();
     setUserData({});
   }
-
+//TODO: logic, if we do have token but don't have userData, loading screen
+//TODO: go back to using user.username in context to check nav/routelist/homepage logic
   return (
     <div className="App">
+
       <userContext.Provider value={{ hasToken: Boolean(userToken), userInfo }}>
         <BrowserRouter>
           <Navigation handleLogOut={userLogout} />
